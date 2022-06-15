@@ -44,7 +44,7 @@ android {
         minSdkVersion 21
     }
 }
-var camerax_version = "1.0.2"
+var camerax_version = "1.2.0-alpha01"
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
