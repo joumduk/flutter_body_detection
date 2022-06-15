@@ -13,7 +13,7 @@ class MLKitSelfieSegmenter {
     init() {
         let options = SelfieSegmenterOptions()
         options.segmenterMode = .singleImage
-        options.shouldEnableRawSizeMask = false
+        options.shouldEnableRawSizeMask = true
         
         self.selfieSegmenter = Segmenter.segmenter(options: options)
     }
