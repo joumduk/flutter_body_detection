@@ -172,7 +172,7 @@ public class SwiftBodyDetectionPlugin: NSObject, FlutterPlugin {
                 return
             }
             
-            guard let data = portraitImage.jpegData(compressionQuality: 90),
+            guard let data = portraitImage.jpegData(compressionQuality: 100),
                   let width = portraitImage.cgImage?.width,
                   let height = portraitImage.cgImage?.height else {
                 return
