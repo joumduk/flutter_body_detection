@@ -80,7 +80,7 @@ public class CameraSession: NSObject {
             strongSelf.captureSession.beginConfiguration()
             // When performing latency tests to determine ideal capture settings,
             // run the app in 'release' mode to get accurate performance metrics
-            strongSelf.captureSession.sessionPreset = AVCaptureSession.Preset.vga640x480
+            strongSelf.captureSession.sessionPreset = AVCaptureSession.Preset.hd1280x720
             
             let output = AVCaptureVideoDataOutput()
             output.videoSettings = [
