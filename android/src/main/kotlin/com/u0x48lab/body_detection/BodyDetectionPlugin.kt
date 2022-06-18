@@ -62,8 +62,8 @@ class BodyDetectionPlugin: FlutterPlugin, MethodChannel.MethodCallHandler, Event
           })
       }
       "setScreenSize" -> {
-        val width = call.argument("width") as Int
-        val height = call.argument("height") as Int
+        val width = call.argument("width") as Int? ?: 0
+        val height = call.argument("height") as Int? ?: 0
         cameraSession?.setScreenSize(width,height)
         result.success(null)
       }
