@@ -61,6 +61,12 @@ class BodyDetectionPlugin: FlutterPlugin, MethodChannel.MethodCallHandler, Event
             result.error("SelfieSegmenterError", it.localizedMessage, it.stackTrace)
           })
       }
+      "setScreenSize" -> {
+        val width = call.argument("width") as Int
+        val height = call.argument("height") as Int
+        cameraSession?.setScreenSize(width,height)
+        result.success(null)
+      }
       "enablePoseDetection" -> {
         poseDetectionEnabled = true
         result.success(null)
