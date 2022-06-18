@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:typed_data';
+import 'dart:ui' as ui;
+import 'dart:io' as io;
 
 import 'package:flutter/services.dart';
 
@@ -126,6 +128,22 @@ class BodyDetection {
   static Future<void> disableBodyMaskDetection() async {
     try {
       await _channel.invokeMethod<void>('disableBodyMaskDetection');
+    } on PlatformException catch (e) {
+      throw BodyDetectionException(e.code, e.message);
+    }
+  }
+
+  static Future<void> setScreenSize({required ui.Size size}) async {
+    if (!io.Platform.isAndroid) return;
+
+    try {
+      final result = await _channel.invokeMapMethod(
+        'setScreenSize',
+        <String, dynamic>{
+          'width': size.width.toInt(),
+          'height': size.height.toInt(),
+        },
+      );
     } on PlatformException catch (e) {
       throw BodyDetectionException(e.code, e.message);
     }
