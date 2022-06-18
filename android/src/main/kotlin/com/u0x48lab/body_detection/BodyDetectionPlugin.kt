@@ -65,23 +65,23 @@ class BodyDetectionPlugin: FlutterPlugin, MethodChannel.MethodCallHandler, Event
         val width = call.argument("width") as Int? ?: 0
         val height = call.argument("height") as Int? ?: 0
         cameraSession?.setScreenSize(width,height)
-        result.success(null)
+        result.success(true)
       }
       "enablePoseDetection" -> {
         poseDetectionEnabled = true
-        result.success(null)
+        result.success(true)
       }
       "disablePoseDetection" -> {
         poseDetectionEnabled = false
-        result.success(null)
+        result.success(true)
       }
       "enableBodyMaskDetection" -> {
         bodyMaskDetectionEnabled = true
-        result.success(null)
+        result.success(true)
       }
       "disableBodyMaskDetection" -> {
         bodyMaskDetectionEnabled = false
-        result.success(null)
+        result.success(true)
       }
       "startCameraStream" -> {
         val session = CameraSession(context)
