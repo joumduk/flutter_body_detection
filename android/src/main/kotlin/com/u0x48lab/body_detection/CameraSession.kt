@@ -40,6 +40,8 @@ class CameraSession(private var context: Context) {
         )
     }
     fun setScreenSize(width:Int,height:Int){
+        if (width == null || height==null) return
+
         screenSize = Size(width,height)
         bindAnalysisUseCase()
 
