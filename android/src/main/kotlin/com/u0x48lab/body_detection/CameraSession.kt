@@ -2,6 +2,7 @@ package com.u0x48lab.body_detection
 
 import android.content.Context
 import android.util.Log
+import android.util.Size
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
@@ -17,6 +18,8 @@ class CameraSession(private var context: Context) {
     private var lensFacing = CameraSelector.LENS_FACING_FRONT
     private var cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
     private val lifecycle = CustomLifecycle()
+    private var screenSize:Size =Size(0,0)
+
 
     init {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(context)
@@ -36,7 +39,11 @@ class CameraSession(private var context: Context) {
             ContextCompat.getMainExecutor(context)
         )
     }
+    fun setScreenSize(width:Int,height:Int){
+        screenSize = Size(width,height)
+        bindAnalysisUseCase()
 
+    }
     private class CustomLifecycle : LifecycleOwner {
         private val lifecycleRegistry: LifecycleRegistry = LifecycleRegistry(this)
 
@@ -98,9 +105,12 @@ class CameraSession(private var context: Context) {
         if (cameraProvider == null) return
 
         unbindAnalysisUseCase()
-
         val builder = ImageAnalysis.Builder()
-            .setTargetAspectRatio(AspectRatio.RATIO_16_9)
+        if(screenSize.width!=0 && screenSize.height!=0){
+            builder .setTargetResolution(screenSize)
+        }else{
+            builder.setTargetAspectRatio(AspectRatio.RATIO_16_9)
+        }
 //            .setTargetResolution(Size(1280, 720))
 //            .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
         val useCase = builder.build()
