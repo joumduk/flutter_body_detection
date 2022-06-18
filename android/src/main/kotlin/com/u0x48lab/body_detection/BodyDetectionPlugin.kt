@@ -65,23 +65,23 @@ class BodyDetectionPlugin: FlutterPlugin, MethodChannel.MethodCallHandler, Event
         val width = call.argument("width") as Int? ?: 0
         val height = call.argument("height") as Int? ?: 0
         cameraSession?.setScreenSize(width,height)
-        result.success(true)
+        result.success(null)
       }
       "enablePoseDetection" -> {
         poseDetectionEnabled = true
-        result.success(true)
+        result.success(null)
       }
       "disablePoseDetection" -> {
         poseDetectionEnabled = false
-        result.success(true)
+        result.success(null)
       }
       "enableBodyMaskDetection" -> {
         bodyMaskDetectionEnabled = true
-        result.success(true)
+        result.success(null)
       }
       "disableBodyMaskDetection" -> {
         bodyMaskDetectionEnabled = false
-        result.success(true)
+        result.success(null)
       }
       "startCameraStream" -> {
         val session = CameraSession(context)
@@ -89,12 +89,12 @@ class BodyDetectionPlugin: FlutterPlugin, MethodChannel.MethodCallHandler, Event
           handleCameraFrame(imageProxy, rotationDegrees)
         }
         cameraSession = session
-        result.success(true)
+        result.success(null)
       }
       "stopCameraStream" -> {
         cameraSession?.stop()
         cameraSession = null
-        result.success(true)
+        result.success(null)
       }
       else -> {
         result.notImplemented()
